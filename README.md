@@ -1,131 +1,177 @@
-# QuickDesk - Help Desk Solution
+# Book Store
 
-## Overview
-
-QuickDesk is a simple, easy-to-use help desk solution where users can raise support tickets, and support staff can manage and resolve them efficiently. The system aims to streamline communication between users and support teams without unnecessary complexity.
+A full-featured React-based online bookstore application with user authentication, shopping cart, admin panel, and support ticketing system.
 
 ## Features
 
-### For End Users
-- Register and login to the system
-- Create tickets with subject, description, category, and optional attachment
-- View and track ticket status
-- Search and filter tickets by status, category, and more
-- Sort tickets by creation date, update date, or comment count
-- Add comments and updates to existing tickets
+### 🛍️ Shopping Features
+- **Catalog**: Browse books with filtering by category
+- **Search**: Search books by title or author
+- **Shopping Cart**: Add/remove books and manage quantities
+- **Checkout**: Secure checkout process with order management
+- **Book Details**: Detailed book information, ratings, and reviews
 
-### For Support Agents
-- View all tickets or filter to assigned tickets
-- Update ticket status (Open → In Progress → Resolved → Closed)
-- Assign tickets to themselves
-- Add comments and updates to tickets
-- Upload file attachments to tickets
+### 👥 User Management
+- **Authentication**: User registration and login with Firebase
+- **User Profile**: View and manage user account information
+- **Password Recovery**: Forgot password functionality
+- **Protected Routes**: Secure pages for authenticated users only
 
-### For Administrators
-- Manage user roles and permissions
-- Create and manage ticket categories
-- Access to all system features
+### 📊 Admin Panel
+- **Dashboard**: Overview of sales and statistics
+- **Book Management**: Add, edit, and delete books
+- **Order Management**: View and manage customer orders
+- **Analytics**: View store statistics and metrics
 
-## Technology Stack
+### 🎫 Support System
+- **Ticket Creation**: Users can create support tickets
+- **Ticket Management**: View ticket status and history
+- **Comments**: Add comments to support tickets
 
-- **Frontend**: React.js with React Router for navigation
-- **UI Framework**: Bootstrap for responsive design
-- **Authentication**: Firebase Authentication
-- **Database**: Firebase Firestore
-- **File Storage**: Firebase Storage
+## Tech Stack
+
+- **Frontend**: React.js
+- **State Management**: Context API (Authentication, Cart, Toast notifications)
+- **Backend**: Firebase (Authentication, Database)
+- **Styling**: CSS
+- **Build Tool**: Create React App
 
 ## Project Structure
 
 ```
-quickdesk/
-├── public/
-│   ├── index.html
-│   └── manifest.json
-├── src/
-│   ├── components/
-│   │   ├── CommentItem.js
-│   │   ├── FileUpload.js
-│   │   ├── FilterBar.js
-│   │   ├── Navbar.js
-│   │   ├── ProtectedRoute.js
-│   │   └── TicketCard.js
-│   ├── context/
-│   │   └── AuthContext.js
-│   ├── pages/
-│   │   ├── AdminPanel.js
-│   │   ├── CreateTicket.js
-│   │   ├── Dashboard.js
-│   │   ├── Home.js
-│   │   ├── Login.js
-│   │   ├── NotFound.js
-│   │   ├── Register.js
-│   │   └── TicketDetail.js
-│   ├── services/
-│   │   └── firebase.js
-│   ├── App.js
-│   ├── index.js
-│   └── index.css
-└── package.json
+src/
+├── components/          # Reusable React components
+│   ├── BookCard.js     # Book card display
+│   ├── CategoryFilter.js
+│   ├── SearchBar.js
+│   ├── Navbar.js
+│   ├── Toast.js        # Notification system
+│   └── ... other components
+├── pages/              # Page components
+│   ├── Home.js
+│   ├── Catalog.js
+│   ├── Cart.js
+│   ├── Checkout.js
+│   ├── AdminPanel.js
+│   ├── Login.js
+│   ├── Register.js
+│   └── ... other pages
+├── context/            # Context providers
+│   ├── AuthContext.js
+│   ├── CartContext.js
+│   └── ToastContext.js
+├── services/           # External services
+│   └── firebase.js     # Firebase configuration
+├── data/               # Static data
+│   └── books.js
+└── App.js             # Main component
 ```
 
 ## Getting Started
 
 ### Prerequisites
-
 - Node.js (v14 or higher)
 - npm or yarn
 - Firebase account
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository:
+```bash
+git clone https://github.com/abhishek-kr07/book-store.git
+cd book-store
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up Firebase configuration:
+   - Create a `.env` or `.env.local` file in the root directory
+   - Add your Firebase configuration:
    ```
-   git clone https://github.com/yourusername/quickdesk.git
-   cd quickdesk
+   REACT_APP_FIREBASE_API_KEY=your_api_key
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   REACT_APP_FIREBASE_APP_ID=your_app_id
    ```
 
-2. Install dependencies
-   ```
-   npm install
-   ```
+4. Start the development server:
+```bash
+npm start
+```
 
-3. Configure Firebase
-   - Create a Firebase project at https://console.firebase.google.com/
-   - Enable Authentication, Firestore, and Storage services
-   - Update the Firebase configuration in `src/services/firebase.js`
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-4. Start the development server
-   ```
-   npm start
-   ```
+## Available Scripts
 
-5. Open your browser and navigate to `http://localhost:3000`
+In the project directory, you can run:
 
-## User Roles and Workflow
+### `npm start`
+Runs the app in development mode.
 
-1. **End User**
-   - Registers/logs in to the system
-   - Creates a ticket with details
-   - Receives updates and can reply if needed
+### `npm test`
+Launches the test runner in interactive watch mode.
 
-2. **Support Agent**
-   - Views open tickets
-   - Assigns tickets to themselves
-   - Updates ticket status as they work on it
-   - Communicates with users through comments
+### `npm run build`
+Builds the app for production to the `build` folder.
 
-3. **Administrator**
-   - Manages user roles
-   - Creates and manages ticket categories
-   - Has access to all system features
+### `npm run eject`
+**Note: this is a one-way operation.**
 
-## Ticket Lifecycle
+## Key Components
 
-1. **Open**: Initial state when a ticket is created
-2. **In Progress**: When a support agent starts working on the ticket
-3. **Resolved**: When the support agent has addressed the issue
-4. **Closed**: Final state after the user confirms the resolution
+### AuthContext
+- Manages user authentication state
+- Provides login, register, and logout functions
+- Handles Firebase authentication
+
+### CartContext
+- Manages shopping cart state
+- Provides add/remove/update cart item functions
+- Persists cart data
+
+### ToastContext
+- Manages notification/toast messages
+- Provides global toast notifications across the app
+
+## Firebase Integration
+
+The app uses Firebase for:
+- User Authentication (Email/Password)
+- Real-time Database (Firestore)
+- File Storage (for book covers and documents)
+
+## Future Enhancements
+
+- Payment gateway integration (Stripe/PayPal)
+- Book recommendations based on user history
+- Email notifications
+- Book reviews and ratings system
+- Advanced search filters
+- Wishlist functionality
+- Social sharing features
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+For questions or support, please contact:
+- GitHub: [@abhishek-kr07](https://github.com/abhishek-kr07)
+
+---
+
+**Note**: Make sure to configure your Firebase credentials before deploying to production.
